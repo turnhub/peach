@@ -38,7 +38,6 @@ defmodule Peach.MixProject do
     [
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/turnhub/peach"},
-      organization: "turnio"
     ]
   end
 end
