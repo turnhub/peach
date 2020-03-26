@@ -36,9 +36,6 @@ defmodule Peach.MixProject do
 
   defp package() do
     [
-      # These are the default files included in the package
-      files: ~w(lib .formatter.exs mix.exs README* readme* LICENSE*
-                license* src),
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/turnhub/peach"},
       organization: "turnio"
