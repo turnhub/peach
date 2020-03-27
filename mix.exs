@@ -38,7 +38,7 @@ defmodule Peach.MixProject do
   defp package() do
     [
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/turnhub/peach"},
+      links: %{"GitHub" => "https://github.com/turnhub/peach"}
     ]
   end
 end
