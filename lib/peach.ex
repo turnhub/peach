@@ -1,5 +1,4 @@
 defmodule Peach do
-
   @moduledoc """
   Documentation for `Peach`.
   """
@@ -21,7 +20,6 @@ defmodule Peach do
   Normalize text
   Unicode NFKC (Normalisation Form Compatibility Composition) normalisation.
   """
-
   def normalise_text do
     # return normalize('NFKC', text)
     :to_do
