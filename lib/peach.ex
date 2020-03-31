@@ -5,7 +5,8 @@ defmodule Peach do
   """
   def normalise_text(phrase) do
     # https://hexdocs.pm/elixir/1.9.4/String.html#normalize/2
-    :unicode.characters_to_nfc_binary(phrase)
+    # erlang.org/doc/man/unicode.html#characters_to_nfkc_binary-1
+    :unicode.characters_to_nfkc_binary(phrase)
   end
 
   @doc """
