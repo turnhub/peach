@@ -11,13 +11,11 @@ defmodule PeachTest do
       ["🚼", "🚼"]
     ]
 
-    if false do
-      test_data =
-        Path.join(["test", "function_test_data", "sample_normalise_text.csv"])
-        |> Path.expand()
-        |> CSVLixir.read()
-        |> Enum.to_list()
-    end
+    test_data =
+      Path.join(["test", "function_test_data", "normalise_text.csv"])
+      |> Path.expand()
+      |> CSVLixir.read()
+      |> Enum.to_list()
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -32,13 +30,11 @@ defmodule PeachTest do
       ["💔foo🈶bar⏮", "foobar"]
     ]
 
-    if false do
-      test_data =
-        Path.join(["test", "function_test_data", "remove_emojis.csv"])
-        |> Path.expand()
-        |> CSVLixir.read()
-        |> Enum.to_list()
-    end
+    test_data =
+      Path.join(["test", "function_test_data", "remove_emojis.csv"])
+      |> Path.expand()
+      |> CSVLixir.read()
+      |> Enum.to_list()
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -73,13 +69,11 @@ defmodule PeachTest do
       ["in     put ", "in put"]
     ]
 
-    if false do
-      test_data =
-        Path.join(["test", "function_test_data", "sample_normalise_whitespace.csv"])
-        |> Path.expand()
-        |> CSVLixir.read()
-        |> Enum.to_list()
-    end
+    test_data =
+      Path.join(["test", "function_test_data", "normalise_whitespace.csv"])
+      |> Path.expand()
+      |> CSVLixir.read()
+      |> Enum.to_list()
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -94,13 +88,11 @@ defmodule PeachTest do
       [" ", " "]
     ]
 
-    if false do
-      test_data =
-        Path.join(["test", "function_test_data", "sample_remove_punc.csv"])
-        |> Path.expand()
-        |> CSVLixir.read()
-        |> Enum.to_list()
-    end
+    test_data =
+      Path.join(["test", "function_test_data", "remove_punc.csv"])
+      |> Path.expand()
+      |> CSVLixir.read()
+      |> Enum.to_list()
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -115,13 +107,11 @@ defmodule PeachTest do
       ["!@#$%^&*()", String.duplicate(" ", 10)]
     ]
 
-    if false do
-      test_data =
-        Path.join(["test", "function_test_data", "sample_replace_punc.csv"])
-        |> Path.expand()
-        |> CSVLixir.read()
-        |> Enum.to_list()
-    end
+    test_data =
+      Path.join(["test", "function_test_data", "replace_punc.csv"])
+      |> Path.expand()
+      |> CSVLixir.read()
+      |> Enum.to_list()
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -137,13 +127,11 @@ defmodule PeachTest do
       ["1 2 3 bar", "bar"]
     ]
 
-    if false do
-      test_data =
-        Path.join(["test", "function_test_data", "sample_remove_numbers.csv"])
-        |> Path.expand()
-        |> CSVLixir.read()
-        |> Enum.to_list()
-    end
+    test_data =
+      Path.join(["test", "function_test_data", "remove_numbers.csv"])
+      |> Path.expand()
+      |> CSVLixir.read()
+      |> Enum.to_list()
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -160,13 +148,11 @@ defmodule PeachTest do
       ["Hi", "hi"]
     ]
 
-    if false do
-      test_data =
-        Path.join(["test", "function_test_data", "sample_pre_process.csv"])
-        |> Path.expand()
-        |> CSVLixir.read()
-        |> Enum.to_list()
-    end
+    test_data =
+      Path.join(["test", "function_test_data", "pre_process.csv"])
+      |> Path.expand()
+      |> CSVLixir.read()
+      |> Enum.to_list()
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -197,17 +183,19 @@ defmodule PeachTest do
       ]
     ]
 
-    if false do
-      test_data =
-        Path.join(["test", "function_test_data", "sample_get_brief.csv"])
-        |> Path.expand()
-        |> CSVLixir.read()
-        |> Enum.to_list()
-    end
+    test_data =
+      Path.join(["test", "function_test_data", "get_brief.csv"])
+      |> Path.expand()
+      |> CSVLixir.read()
+      |> Enum.to_list()
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
       assert Peach.get_brief(input, 50) == expected_output
     end)
   end
+
+  # test "levenshtein" do
+  #   assert Peach.lvnshtn("cat", "dog") == 3
+  # end
 end
