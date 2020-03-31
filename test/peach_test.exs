@@ -156,8 +156,8 @@ defmodule PeachTest do
     test_data = [
       # ["ا","ا"], FAILURE CASE
       # ["مافهمت","مافهمت"], FAILURE CASE
-      ["Travel advice","travel advice"],
-      ["Hi","hi"]
+      ["Travel advice", "travel advice"],
+      ["Hi", "hi"]
     ]
 
     if false do
@@ -176,8 +176,8 @@ defmodule PeachTest do
 
   test "convert to one line" do
     test_data = [
-      ["\nfoo\nbar","\\nfoo\\nbar"],
-      ["\rfoo\rbar","\\rfoo\\rbar"],
+      ["\nfoo\nbar", "\\nfoo\\nbar"],
+      ["\rfoo\rbar", "\\rfoo\\rbar"]
     ]
 
     test_data
@@ -191,7 +191,10 @@ defmodule PeachTest do
     test_data = [
       # TODO: update test values
       ["this is short sentence", "this is short sentence"],
-      ["this is a much longer sentence that will run on for quite some time", "this is a much longer sentence that will run on ..."]
+      [
+        "this is a much longer sentence that will run on for quite some time",
+        "this is a much longer sentence that will run on ..."
+      ]
     ]
 
     if false do
