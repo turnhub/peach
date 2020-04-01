@@ -212,4 +212,11 @@ defmodule PeachTest do
       assert Peach.get_brief(input, 50) == expected_output
     end)
   end
+
+  test "levenshtein" do
+    assert Peach.levenshtein_distance("foo", "bar") == 3
+    assert Peach.levenshtein_distance("foo", "bar") != 2
+    assert Peach.levenshtein_distance("", "") == 0
+    assert Peach.levenshtein_distance("foo", "") == 3
+  end
 end
