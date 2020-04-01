@@ -8,7 +8,9 @@ defmodule PeachTest do
     test_data = [
       ["foo", "foo"],
       ["\n", "\n"],
-      ["🚼", "🚼"]
+      ["🚼", "🚼"],
+      [[500], "Ǵ"],
+      [[600], "ɘ"]
     ]
 
     if false do
