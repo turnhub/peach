@@ -182,7 +182,7 @@ defmodule PeachTest do
       ["Travel advice", "travel advice"],
       ["Hi", "hi"],
       ["2️⃣", "2"],
-      ["1️⃣", "1"],
+      ["1️⃣", "1"]
     ]
 
     # CSVLixir requires the use if a try catch :-(
