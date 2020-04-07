@@ -16,12 +16,13 @@ defmodule PeachTest do
       ["ａｂｃＡＢＣ", "abcABC"]
     ]
 
+    # CSVLixir requires the use if a try catch :-(
     test_data =
-      try do  # CSVLixir requires the use if a try catch :-(
-          Path.join(["test", "function_test_data", "normalise_text.csv"])
-          |> Path.expand()
-          |> CSVLixir.read()
-          |> Enum.to_list()
+      try do
+        Path.join(["test", "function_test_data", "normalise_text.csv"])
+        |> Path.expand()
+        |> CSVLixir.read()
+        |> Enum.to_list()
       catch
         _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
       end
@@ -39,12 +40,13 @@ defmodule PeachTest do
       ["💔foo🈶bar⏮", "foobar"]
     ]
 
+    # CSVLixir requires the use if a try catch :-(
     test_data =
-      try do  # CSVLixir requires the use if a try catch :-(
-          Path.join(["test", "function_test_data", "remove_emojis.csv"])
-          |> Path.expand()
-          |> CSVLixir.read()
-          |> Enum.to_list()
+      try do
+        Path.join(["test", "function_test_data", "remove_emojis.csv"])
+        |> Path.expand()
+        |> CSVLixir.read()
+        |> Enum.to_list()
       catch
         _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
       end
@@ -82,12 +84,13 @@ defmodule PeachTest do
       ["in     put ", "in put"]
     ]
 
+    # CSVLixir requires the use if a try catch :-(
     test_data =
-      try do  # CSVLixir requires the use if a try catch :-(
-          Path.join(["test", "function_test_data", "normalise_whitespace.csv"])
-          |> Path.expand()
-          |> CSVLixir.read()
-          |> Enum.to_list()
+      try do
+        Path.join(["test", "function_test_data", "normalise_whitespace.csv"])
+        |> Path.expand()
+        |> CSVLixir.read()
+        |> Enum.to_list()
       catch
         _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
       end
@@ -105,12 +108,13 @@ defmodule PeachTest do
       [" ", " "]
     ]
 
+    # CSVLixir requires the use if a try catch :-(
     test_data =
-      try do  # CSVLixir requires the use if a try catch :-(
-          Path.join(["test", "function_test_data", "remove_punc.csv"])
-          |> Path.expand()
-          |> CSVLixir.read()
-          |> Enum.to_list()
+      try do
+        Path.join(["test", "function_test_data", "remove_punc.csv"])
+        |> Path.expand()
+        |> CSVLixir.read()
+        |> Enum.to_list()
       catch
         _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
       end
@@ -128,12 +132,13 @@ defmodule PeachTest do
       ["!@#$%^&*()", String.duplicate(" ", 10)]
     ]
 
+    # CSVLixir requires the use if a try catch :-(
     test_data =
-      try do  # CSVLixir requires the use if a try catch :-(
-          Path.join(["test", "function_test_data", "replace_punc.csv"])
-          |> Path.expand()
-          |> CSVLixir.read()
-          |> Enum.to_list()
+      try do
+        Path.join(["test", "function_test_data", "replace_punc.csv"])
+        |> Path.expand()
+        |> CSVLixir.read()
+        |> Enum.to_list()
       catch
         _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
       end
@@ -152,12 +157,13 @@ defmodule PeachTest do
       ["1 2 3 bar", "bar"]
     ]
 
+    # CSVLixir requires the use if a try catch :-(
     test_data =
-      try do  # CSVLixir requires the use if a try catch :-(
-          Path.join(["test", "function_test_data", "remove_numbers.csv"])
-          |> Path.expand()
-          |> CSVLixir.read()
-          |> Enum.to_list()
+      try do
+        Path.join(["test", "function_test_data", "remove_numbers.csv"])
+        |> Path.expand()
+        |> CSVLixir.read()
+        |> Enum.to_list()
       catch
         _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
       end
@@ -177,12 +183,13 @@ defmodule PeachTest do
       ["Hi", "hi"]
     ]
 
+    # CSVLixir requires the use if a try catch :-(
     test_data =
-      try do  # CSVLixir requires the use if a try catch :-(
-          Path.join(["test", "function_test_data", "pre_process.csv"])
-          |> Path.expand()
-          |> CSVLixir.read()
-          |> Enum.to_list()
+      try do
+        Path.join(["test", "function_test_data", "pre_process.csv"])
+        |> Path.expand()
+        |> CSVLixir.read()
+        |> Enum.to_list()
       catch
         _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
       end
@@ -211,5 +218,4 @@ defmodule PeachTest do
     assert Peach.levenshtein_distance("", "") == 0
     assert Peach.levenshtein_distance("foo", "") == 3
   end
-
 end

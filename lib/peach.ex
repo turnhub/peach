@@ -47,7 +47,7 @@ defmodule Peach do
   def remove_numbers(phrase) do
     String.replace(phrase, ~r/\b\d+\s*/u, "")
   end
-  
+
   @doc """
   Pre-process an utterance in prepartion for number AND keyword matching
   """
