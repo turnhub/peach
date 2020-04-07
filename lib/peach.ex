@@ -52,9 +52,6 @@ defmodule Peach do
   Pre-process an utterance in prepartion for number AND keyword matching
   """
   def pre_process(phrase) do
-    # python
-    #   return normalise_whitespace(replace_punc(remove_emojis(normalise_text(text.lower()))))
-
     phrase
     |> String.downcase()
     |> normalise_text
@@ -67,8 +64,6 @@ defmodule Peach do
   Get string in to one line
   """
   def convert_to_one_line(phrase) do
-    # python:
-    #     in_one_line = text.replace('\n', '\\n').replace('\r', '\\r')
     phrase
     |> String.replace("\n", "\\n")
     |> String.replace("\r", "\\r")
@@ -78,11 +73,6 @@ defmodule Peach do
   Extract the first few characters of the utterance.
   """
   def get_brief(phrase, num_chars) do
-    # python
-    #     in_one_line = text.replace('\n', '\\n').replace('\r', '\\r')
-    #     brief = text if len(in_one_line) < num_chars else in_one_line[:(num_chars-3)]+'...'
-    #     return brief
-
     single_line_value = convert_to_one_line(phrase)
 
     if String.length(single_line_value) < num_chars do

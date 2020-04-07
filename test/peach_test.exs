@@ -180,7 +180,9 @@ defmodule PeachTest do
       # ["ا","ا"], FAILURE CASE
       # ["مافهمت","مافهمت"], FAILURE CASE
       ["Travel advice", "travel advice"],
-      ["Hi", "hi"]
+      ["Hi", "hi"],
+      ["2️⃣", "2"],
+      ["1️⃣", "1"],
     ]
 
     # CSVLixir requires the use if a try catch :-(
