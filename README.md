@@ -19,3 +19,18 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/peach](https://hexdocs.pm/peach).
 
+## Test
+
+to test with CSV data, create a folder in the `/test/` folder called `function_test_data` and put the following CSVs in them:
+
+* `normalise_whitespace.csv`
+* `remove_punc.csv`
+* `pre_process.csv`
+* `remove_emojis.csv`
+* `normalise_text.csv`
+* `replace_punc.csv`
+* `get_brief.csv`
+* `remove_numbers.csv`
+
+then run `mix test`
+or `mix test.watch test/peach_test.exs --failed --max-failures=1 --seed=0`
