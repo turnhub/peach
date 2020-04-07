@@ -23,7 +23,7 @@ defmodule Peach do
   Replace spans of whitespace with a single space
   """
   def normalise_whitespace(phrase) do
-    String.replace(phrase, ~r/\s+/, " ")
+    String.replace(phrase, ~r/\s+/u, " ")
     |> String.trim()
   end
 
@@ -31,23 +31,23 @@ defmodule Peach do
   Remove punctuation without substitution
   """
   def remove_punc(phrase) do
-    String.replace(phrase, ~r/[\p{P}\p{S}]/, "")
+    String.replace(phrase, ~r/[\p{P}\p{S}]/u, "")
   end
 
   @doc """
   Replace punctuation marks with spaces
   """
   def replace_punc(phrase) do
-    String.replace(phrase, ~r/[\p{P}\p{S}]/, " ")
+    String.replace(phrase, ~r/[\p{P}\p{S}]/u, " ")
   end
 
   @doc """
   Remove numbers without substitution. Applied before keyword matching
   """
   def remove_numbers(phrase) do
-    String.replace(phrase, ~r/[\b\d+\s+]/, "")
+    String.replace(phrase, ~r/\b\d+\s*/u, "")
   end
-
+  
   @doc """
   Pre-process an utterance in prepartion for number AND keyword matching
   """
@@ -88,7 +88,7 @@ defmodule Peach do
     if String.length(single_line_value) < num_chars do
       phrase
     else
-      end_slice_value = num_chars - 3
+      end_slice_value = num_chars - 4
       String.slice(phrase, 0..end_slice_value) <> "..."
     end
   end

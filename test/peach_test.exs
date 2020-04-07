@@ -191,7 +191,7 @@ defmodule PeachTest do
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
-      assert Peach.get_brief(input, 50) == expected_output
+      assert Peach.get_brief(input, 20) == expected_output
     end)
   end
 
