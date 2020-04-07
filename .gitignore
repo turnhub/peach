@@ -27,3 +27,8 @@ peach-*.tar
 *.beam
 /config/*.secret.exs
 .elixir_ls/
+
+# custom
+.DS_Store
+
+test/function_test_data/
