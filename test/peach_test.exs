@@ -8,14 +8,23 @@ defmodule PeachTest do
     test_data = [
       ["foo", "foo"],
       ["\n", "\n"],
-      ["🚼", "🚼"]
+      ["🚼", "🚼"],
+      [[500], "Ǵ"],
+      [[600], "ɘ"],
+      ["＋－．～）｝", "+-.~)}"],
+      ["１２３", "123"],
+      ["ａｂｃＡＢＣ", "abcABC"]
     ]
 
     test_data =
-      Path.join(["test", "function_test_data", "normalise_text.csv"])
-      |> Path.expand()
-      |> CSVLixir.read()
-      |> Enum.to_list()
+      try do  # CSVLixir requires the use if a try catch :-(
+          Path.join(["test", "function_test_data", "normalise_text.csv"])
+          |> Path.expand()
+          |> CSVLixir.read()
+          |> Enum.to_list()
+      catch
+        _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
+      end
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -31,10 +40,14 @@ defmodule PeachTest do
     ]
 
     test_data =
-      Path.join(["test", "function_test_data", "remove_emojis.csv"])
-      |> Path.expand()
-      |> CSVLixir.read()
-      |> Enum.to_list()
+      try do  # CSVLixir requires the use if a try catch :-(
+          Path.join(["test", "function_test_data", "remove_emojis.csv"])
+          |> Path.expand()
+          |> CSVLixir.read()
+          |> Enum.to_list()
+      catch
+        _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
+      end
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -70,10 +83,14 @@ defmodule PeachTest do
     ]
 
     test_data =
-      Path.join(["test", "function_test_data", "normalise_whitespace.csv"])
-      |> Path.expand()
-      |> CSVLixir.read()
-      |> Enum.to_list()
+      try do  # CSVLixir requires the use if a try catch :-(
+          Path.join(["test", "function_test_data", "normalise_whitespace.csv"])
+          |> Path.expand()
+          |> CSVLixir.read()
+          |> Enum.to_list()
+      catch
+        _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
+      end
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -89,10 +106,14 @@ defmodule PeachTest do
     ]
 
     test_data =
-      Path.join(["test", "function_test_data", "remove_punc.csv"])
-      |> Path.expand()
-      |> CSVLixir.read()
-      |> Enum.to_list()
+      try do  # CSVLixir requires the use if a try catch :-(
+          Path.join(["test", "function_test_data", "remove_punc.csv"])
+          |> Path.expand()
+          |> CSVLixir.read()
+          |> Enum.to_list()
+      catch
+        _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
+      end
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -108,10 +129,14 @@ defmodule PeachTest do
     ]
 
     test_data =
-      Path.join(["test", "function_test_data", "replace_punc.csv"])
-      |> Path.expand()
-      |> CSVLixir.read()
-      |> Enum.to_list()
+      try do  # CSVLixir requires the use if a try catch :-(
+          Path.join(["test", "function_test_data", "replace_punc.csv"])
+          |> Path.expand()
+          |> CSVLixir.read()
+          |> Enum.to_list()
+      catch
+        _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
+      end
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -123,15 +148,19 @@ defmodule PeachTest do
   test "remove_numbers" do
     test_data = [
       ["1234", ""],
-      ["1foo2", "foo"],
+      ["1foo2", "foo2"],
       ["1 2 3 bar", "bar"]
     ]
 
     test_data =
-      Path.join(["test", "function_test_data", "remove_numbers.csv"])
-      |> Path.expand()
-      |> CSVLixir.read()
-      |> Enum.to_list()
+      try do  # CSVLixir requires the use if a try catch :-(
+          Path.join(["test", "function_test_data", "remove_numbers.csv"])
+          |> Path.expand()
+          |> CSVLixir.read()
+          |> Enum.to_list()
+      catch
+        _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
+      end
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -149,10 +178,14 @@ defmodule PeachTest do
     ]
 
     test_data =
-      Path.join(["test", "function_test_data", "pre_process.csv"])
-      |> Path.expand()
-      |> CSVLixir.read()
-      |> Enum.to_list()
+      try do  # CSVLixir requires the use if a try catch :-(
+          Path.join(["test", "function_test_data", "pre_process.csv"])
+          |> Path.expand()
+          |> CSVLixir.read()
+          |> Enum.to_list()
+      catch
+        _kind, %File.Error{reason: :enoent} -> test_data |> Enum.to_list()
+      end
 
     test_data
     |> Enum.map(fn [input, expected_output] ->
@@ -171,33 +204,12 @@ defmodule PeachTest do
       assert Peach.convert_to_one_line(input) == expected_output
     end)
   end
-  
-  # Removed get_brief from testing since the String slicing behaves different from Python for unicode
-  # BUT the difference is not functionally important.
-  # @tag timeout: 6000_000
-  # test "get_brief" do
-  #   test_data = [
-  #     # TODO: update test values
-  #     ["this is short sentence", "this is short sentence"],
-  #     [
-  #       "this is a much longer sentence that will run on for quite some time",
-  #       "this is a much longer sentence that will run on ..."
-  #     ]
-  #   ]
-  # 
-  #   test_data =
-  #     Path.join(["test", "function_test_data", "get_brief.csv"])
-  #     |> Path.expand()
-  #     |> CSVLixir.read()
-  #     |> Enum.to_list()
-  # 
-  #   test_data
-  #   |> Enum.map(fn [input, expected_output] ->
-  #     assert Peach.get_brief(input, 20) == expected_output
-  #   end)
-  # end
 
-  # test "levenshtein" do
-  #   assert Peach.lvnshtn("cat", "dog") == 3
-  # end
+  test "levenshtein" do
+    assert Peach.levenshtein_distance("foo", "bar") == 3
+    assert Peach.levenshtein_distance("foo", "bar") != 2
+    assert Peach.levenshtein_distance("", "") == 0
+    assert Peach.levenshtein_distance("foo", "") == 3
+  end
+
 end

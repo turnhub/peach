@@ -96,4 +96,8 @@ defmodule Peach do
   def get_brief(phrase) do
     get_brief(phrase, 20)
   end
+
+  def levenshtein_distance(first_phrase, second_phrase) do
+    :levenshtein.levenshtein(first_phrase, second_phrase)
+  end
 end
