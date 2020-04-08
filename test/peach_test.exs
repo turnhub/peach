@@ -291,4 +291,34 @@ defmodule PeachTest do
                |> Peach.find_fuzzy_matches(keyword_threshold_set)
     end)
   end
+
+  test "general_use_cases" do
+    input = "2.)"
+    keyword_set = MapSet.new(["1", "2", "menu"])
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_exact_match(keyword_set)
+
+    assert matches == "2"
+
+    input = "menuu"
+    keyword_set = MapSet.new(["menu", "optin", "optout"])
+    threshold = 1
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_fuzzy_matches(keyword_set, threshold)
+
+    assert matches == [{"menu", 1}]
+
+    input = "optint"
+    keyword_threshold_set = MapSet.new([{"menu", 1}, {"optin", 2}, {"optout", 2}])
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_fuzzy_matches(keyword_threshold_set)
+
+    assert matches == [{"optin", 1}, {"optout", 2}]
+  end
 end
