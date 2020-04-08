@@ -106,16 +106,20 @@ defmodule Peach do
   """
   def find_fuzzy_matches(input, keyword_threshold_set) do
     keyword_threshold_set
-    |> Enum.map(fn {keyword, threshold} ->  # add the edit distance.      
+    # add the edit distance.      
+    |> Enum.map(fn {keyword, threshold} ->
       {keyword, remove_numbers(input) |> levenshtein_distance(keyword), threshold}
     end)
-    |> Enum.filter(fn {_keyword, distance, threshold} ->  # only keep close matches.
+    # only keep close matches.
+    |> Enum.filter(fn {_keyword, distance, threshold} ->
       distance <= threshold
     end)
-    |> Enum.map(fn {keyword, distance, _threshold} ->  # drop threshold.
+    # drop threshold.
+    |> Enum.map(fn {keyword, distance, _threshold} ->
       {keyword, distance}
     end)
-    |> Enum.sort(&(elem(&1,1) < elem(&2,1)))  # order from best to worst matches.
+    # order from best to worst matches.
+    |> Enum.sort(&(elem(&1, 1) < elem(&2, 1)))
   end
 
   @doc """
@@ -123,13 +127,12 @@ defmodule Peach do
   """
   def find_fuzzy_matches(input, keyword_set, threshold) do
     # build keyword_threshold_set. 
-    keyword_threshold_set = 
+    keyword_threshold_set =
       keyword_set
       |> Enum.map(fn keyword ->
         {keyword, threshold}
       end)
-      
+
     find_fuzzy_matches(input, keyword_threshold_set)
   end
-
 end

@@ -244,13 +244,18 @@ defmodule PeachTest do
 
   test "find_fuzzy_matches_single_threshold" do
     keyword_set = MapSet.new(["menu", "optin", "optout"])
-    
+
     test_data = [
-      ["menuu", keyword_set, [{"menu", 1}]],  # one addition
-      ["opin", keyword_set, [{"optin", 1}]],  # one deletion
-      ["optin", keyword_set, [{"optin", 0}]],  # exact match
-      ["optout", keyword_set, [{"optout", 0}]],  # exact match
-      ["optint", keyword_set, [{"optin", 1}]]  # one addition
+      # one addition
+      ["menuu", keyword_set, [{"menu", 1}]],
+      # one deletion
+      ["opin", keyword_set, [{"optin", 1}]],
+      # exact match
+      ["optin", keyword_set, [{"optin", 0}]],
+      # exact match
+      ["optout", keyword_set, [{"optout", 0}]],
+      # one addition
+      ["optint", keyword_set, [{"optin", 1}]]
     ]
 
     threshold = 1
@@ -267,11 +272,16 @@ defmodule PeachTest do
     keyword_threshold_set = MapSet.new([{"menu", 1}, {"optin", 2}, {"optout", 2}])
 
     test_data = [
-      ["menuu", keyword_threshold_set, [{"menu", 1}]],  # one addition
-      ["opin", keyword_threshold_set, [{"optin", 1}]],  # one deletion
-      ["optin", keyword_threshold_set, [{"optin", 0}]],  # exact match
-      ["optout", keyword_threshold_set, [{"optout", 0}]],  # exact match
-      ["optint", keyword_threshold_set, [{"optin", 1}, {"optout", 2}]]  # one addition, two replacements
+      # one addition
+      ["menuu", keyword_threshold_set, [{"menu", 1}]],
+      # one deletion
+      ["opin", keyword_threshold_set, [{"optin", 1}]],
+      # exact match
+      ["optin", keyword_threshold_set, [{"optin", 0}]],
+      # exact match
+      ["optout", keyword_threshold_set, [{"optout", 0}]],
+      # one addition, two replacements
+      ["optint", keyword_threshold_set, [{"optin", 1}, {"optout", 2}]]
     ]
 
     test_data
@@ -281,5 +291,4 @@ defmodule PeachTest do
                |> Peach.find_fuzzy_matches(keyword_threshold_set)
     end)
   end
-
 end
