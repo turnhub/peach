@@ -1,6 +1,6 @@
 # Peach
 
-an elixir library to generate potential fuzzy matches
+An elixir library to do approximate/fuzzy string matching.
 
 ## Installation
 

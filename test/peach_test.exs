@@ -16,6 +16,7 @@ defmodule PeachTest do
       ["ａｂｃＡＢＣ", "abcABC"]
     ]
 
+    # Try to load alternative testing data.
     # CSVLixir requires the use if a try catch :-(
     test_data =
       try do
@@ -40,6 +41,7 @@ defmodule PeachTest do
       ["💔foo🈶bar⏮", "foobar"]
     ]
 
+    # Try to load alternative testing data.
     # CSVLixir requires the use if a try catch :-(
     test_data =
       try do
@@ -84,6 +86,7 @@ defmodule PeachTest do
       ["in     put ", "in put"]
     ]
 
+    # Try to load alternative testing data.
     # CSVLixir requires the use if a try catch :-(
     test_data =
       try do
@@ -108,6 +111,7 @@ defmodule PeachTest do
       [" ", " "]
     ]
 
+    # Try to load alternative testing data.
     # CSVLixir requires the use if a try catch :-(
     test_data =
       try do
@@ -132,6 +136,7 @@ defmodule PeachTest do
       ["!@#$%^&*()", String.duplicate(" ", 10)]
     ]
 
+    # Try to load alternative testing data.
     # CSVLixir requires the use if a try catch :-(
     test_data =
       try do
@@ -157,6 +162,7 @@ defmodule PeachTest do
       ["1 2 3 bar", "bar"]
     ]
 
+    # Try to load alternative testing data.
     # CSVLixir requires the use if a try catch :-(
     test_data =
       try do
@@ -185,6 +191,7 @@ defmodule PeachTest do
       ["1️⃣", "1"]
     ]
 
+    # Try to load alternative testing data.
     # CSVLixir requires the use if a try catch :-(
     test_data =
       try do
@@ -219,5 +226,99 @@ defmodule PeachTest do
     assert Peach.levenshtein_distance("foo", "bar") != 2
     assert Peach.levenshtein_distance("", "") == 0
     assert Peach.levenshtein_distance("foo", "") == 3
+  end
+
+  test "ex_find_exact_match" do
+    test_data = [
+      ["*menu*", MapSet.new(["menu", "opt-in", "opt-out"]), "menu"],
+      ["2.", MapSet.new(["1", "2", "3"]), "2"]
+    ]
+
+    test_data
+    |> Enum.map(fn [input, keywords, expected_match] ->
+      assert expected_match ==
+               Peach.pre_process(input)
+               |> Peach.find_exact_match(keywords)
+    end)
+  end
+
+  test "find_fuzzy_matches_single_threshold" do
+    keyword_set = MapSet.new(["menu", "optin", "optout"])
+
+    test_data = [
+      # one addition
+      ["menuu", keyword_set, [{"menu", 1}]],
+      # one deletion
+      ["opin", keyword_set, [{"optin", 1}]],
+      # exact match
+      ["optin", keyword_set, [{"optin", 0}]],
+      # exact match
+      ["optout", keyword_set, [{"optout", 0}]],
+      # one addition
+      ["optint", keyword_set, [{"optin", 1}]]
+    ]
+
+    threshold = 1
+
+    test_data
+    |> Enum.map(fn [input, keyword_set, expected_matches] ->
+      assert expected_matches ==
+               Peach.pre_process(input)
+               |> Peach.find_fuzzy_matches(keyword_set, threshold)
+    end)
+  end
+
+  test "find_fuzzy_matches" do
+    keyword_threshold_set = MapSet.new([{"menu", 1}, {"optin", 2}, {"optout", 2}])
+
+    test_data = [
+      # one addition
+      ["menuu", keyword_threshold_set, [{"menu", 1}]],
+      # one deletion
+      ["opin", keyword_threshold_set, [{"optin", 1}]],
+      # exact match
+      ["optin", keyword_threshold_set, [{"optin", 0}]],
+      # exact match
+      ["optout", keyword_threshold_set, [{"optout", 0}]],
+      # one addition, two replacements
+      ["optint", keyword_threshold_set, [{"optin", 1}, {"optout", 2}]]
+    ]
+
+    test_data
+    |> Enum.map(fn [input, keyword_threshold_set, expected_matches] ->
+      assert expected_matches ==
+               Peach.pre_process(input)
+               |> Peach.find_fuzzy_matches(keyword_threshold_set)
+    end)
+  end
+
+  test "general_use_cases" do
+    input = "2.)"
+    keyword_set = MapSet.new(["1", "2", "menu"])
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_exact_match(keyword_set)
+
+    assert matches == "2"
+
+    input = "menuu"
+    keyword_set = MapSet.new(["menu", "optin", "optout"])
+    threshold = 1
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_fuzzy_matches(keyword_set, threshold)
+
+    assert matches == [{"menu", 1}]
+
+    input = "optint"
+    keyword_threshold_set = MapSet.new([{"menu", 1}, {"optin", 2}, {"optout", 2}])
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_fuzzy_matches(keyword_threshold_set)
+
+    assert matches == [{"optin", 1}, {"optout", 2}]
   end
 end

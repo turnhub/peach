@@ -72,9 +72,7 @@ defmodule Peach do
   @doc """
   Extract the first few characters of the utterance.
   """
-  def get_brief(phrase, number_chars \\ 20)
-
-  def get_brief(phrase, num_chars) do
+  def get_brief(phrase, num_chars \\ 20) do
     single_line_value = convert_to_one_line(phrase)
 
     if String.length(single_line_value) < num_chars do
@@ -85,7 +83,56 @@ defmodule Peach do
     end
   end
 
+  @doc """
+  Calculate the Levenshtein edit distance.
+  """
   def levenshtein_distance(first_phrase, second_phrase) do
     :levenshtein.levenshtein(first_phrase, second_phrase)
+  end
+
+  @doc """
+  Find if there is an exact match to keyword set. The keywords may be numbers.
+  """
+  def find_exact_match(input, keyword_set) do
+    if input in keyword_set do
+      input
+    else
+      nil
+    end
+  end
+
+  @doc """
+  Find the fuzzy matches to the keyword_threshold set. Each keyword has its own threshold.
+  """
+  def find_fuzzy_matches(input, keyword_threshold_set) do
+    keyword_threshold_set
+    # add the edit distance.      
+    |> Enum.map(fn {keyword, threshold} ->
+      {keyword, remove_numbers(input) |> levenshtein_distance(keyword), threshold}
+    end)
+    # only keep close matches.
+    |> Enum.filter(fn {_keyword, distance, threshold} ->
+      distance <= threshold
+    end)
+    # drop threshold.
+    |> Enum.map(fn {keyword, distance, _threshold} ->
+      {keyword, distance}
+    end)
+    # order from best to worst matches.
+    |> Enum.sort(&(elem(&1, 1) < elem(&2, 1)))
+  end
+
+  @doc """
+  Find the fuzzy matches to the keyword set. All keywords use the same threshold.
+  """
+  def find_fuzzy_matches(input, keyword_set, threshold) do
+    # build keyword_threshold_set. 
+    keyword_threshold_set =
+      keyword_set
+      |> Enum.map(fn keyword ->
+        {keyword, threshold}
+      end)
+
+    find_fuzzy_matches(input, keyword_threshold_set)
   end
 end
