@@ -72,6 +72,8 @@ defmodule Peach do
   @doc """
   Extract the first few characters of the utterance.
   """
+  def get_brief(phrase, number_chars \\ 20)
+
   def get_brief(phrase, num_chars) do
     single_line_value = convert_to_one_line(phrase)
 
@@ -81,10 +83,6 @@ defmodule Peach do
       end_slice_value = num_chars - 4
       String.slice(phrase, 0..end_slice_value) <> "..."
     end
-  end
-
-  def get_brief(phrase) do
-    get_brief(phrase, 20)
   end
 
   def levenshtein_distance(first_phrase, second_phrase) do
