@@ -293,6 +293,7 @@ defmodule PeachTest do
   end
 
   test "general_use_cases" do
+    # Menu number and exact keyword match.
     input = "2.)"
     keyword_set = MapSet.new(["1", "2", "menu"])
 
@@ -302,6 +303,7 @@ defmodule PeachTest do
 
     assert matches == "2"
 
+    # Fuzzy keyword match with global threshold.
     input = "menuu"
     keyword_set = MapSet.new(["menu", "optin", "optout"])
     threshold = 1
@@ -312,6 +314,7 @@ defmodule PeachTest do
 
     assert matches == [{"menu", 1}]
 
+    # Fuzzy keyword match with a threshold per keyword.
     input = "optint"
     keyword_threshold_set = MapSet.new([{"menu", 1}, {"optin", 2}, {"optout", 2}])
 
