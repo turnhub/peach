@@ -1,0 +1,29 @@
+version: 2
+jobs:
+  test_package:
+    docker:
+      - image: elixir:1.9
+        environment:
+          MIX_ENV: test
+
+    # working_directory:
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: |
+            mix local.hex --force && \
+            mix local.rebar --force && \
+            mix deps.get && \
+            mix compile && \
+            mix format --check-formatted
+      - run:
+          name: test suite
+          command: |
+            mix test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test_package

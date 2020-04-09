@@ -4,10 +4,14 @@ defmodule Peach.MixProject do
   def project do
     [
       app: :peach,
-      version: "0.1.0",
-      elixir: "~> 1.10",
+      version: "0.0.1",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      description: description(),
+      package: package(),
+      deps: deps(),
+      name: "Peach",
+      source_url: "https://github.com/turnhub/peach"
     ]
   end
 
@@ -21,8 +25,22 @@ defmodule Peach.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:mix_test_watch, "~> 1.0.1", only: :dev, runtime: false},
+      {:levenshtein, git: "https://github.com/rschlaikjer/erlang-levenshtein.git", tag: "0.6.0"},
+      {:csvlixir, "~> 2.0.3", only: :test},
+      {:remove_emoji, "~> 1.0.1"}
+    ]
+  end
+
+  defp description() do
+    "an elixir library to generate potential fuzzy matches"
+  end
+
+  defp package() do
+    [
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/turnhub/peach"}
     ]
   end
 end
