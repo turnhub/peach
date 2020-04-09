@@ -94,7 +94,11 @@ defmodule Peach do
   Find if there is an exact match to keyword set. The keywords may be numbers.
   """
   def find_exact_match(input, keyword_set),
-    do: Enum.find(keyword_set, &String.equivalent?(input, &1))
+    do:
+      Enum.find(keyword_set, fn
+        ^input -> true
+        other -> false
+      end)
 
   @doc """
   Find the fuzzy matches to the keyword_threshold set. Each keyword has its own threshold.
