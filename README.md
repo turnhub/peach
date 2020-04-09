@@ -39,7 +39,7 @@ or `mix test.watch test/peach_test.exs --max-failures=1 --seed=0`
 
 ## Using
 
-Below are some examples of how Peach might be used to do the type of fuzzy matching automation required in the first tier a menu centred chatbot.
+Below are some examples of how Peach might be used to do the type of fuzzy matching automation required in the first tier of a menu centred chatbot.
 
 ### Menu number and keyword match.
 
