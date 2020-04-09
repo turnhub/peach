@@ -93,22 +93,19 @@ defmodule Peach do
   @doc """
   Find if there is an exact match to keyword set. The keywords may be numbers.
   """
-  def find_exact_match(input, keyword_set) do
-    if input in keyword_set do
-      input
-    else
-      nil
-    end
-  end
+  def find_exact_match(input, keyword_set),
+    do: Enum.find(keyword_set, &String.equivalent?(input, &1))
 
   @doc """
   Find the fuzzy matches to the keyword_threshold set. Each keyword has its own threshold.
   """
   def find_fuzzy_matches(input, keyword_threshold_set) do
+    cleaned_input = remove_numbers(input)
+
     keyword_threshold_set
-    # add the edit distance.      
+    # add the edit distance.
     |> Enum.map(fn {keyword, threshold} ->
-      {keyword, remove_numbers(input) |> levenshtein_distance(keyword), threshold}
+      {keyword, levenshtein_distance(cleaned_input, keyword), threshold}
     end)
     # only keep close matches.
     |> Enum.filter(fn {_keyword, distance, threshold} ->
@@ -126,7 +123,7 @@ defmodule Peach do
   Find the fuzzy matches to the keyword set. All keywords use the same threshold.
   """
   def find_fuzzy_matches(input, keyword_set, threshold) do
-    # build keyword_threshold_set. 
+    # build keyword_threshold_set.
     keyword_threshold_set =
       keyword_set
       |> Enum.map(fn keyword ->
