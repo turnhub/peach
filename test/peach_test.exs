@@ -234,9 +234,21 @@ defmodule PeachTest do
       ["2.", MapSet.new(["1", "2", "3"]), "2"]
     ]
 
+    test_data_neg = [
+      ["*home*", MapSet.new(["menu", "opt-in", "opt-out"]), "menu"],
+      ["4.", MapSet.new(["1", "2", "3"]), "2"]
+    ]
+
     test_data
     |> Enum.map(fn [input, keywords, expected_match] ->
       assert expected_match ==
+               Peach.pre_process(input)
+               |> Peach.find_exact_match(keywords)
+    end)
+
+    test_data_neg
+    |> Enum.map(fn [input, keywords, _expected_match] ->
+      assert nil ==
                Peach.pre_process(input)
                |> Peach.find_exact_match(keywords)
     end)
@@ -302,6 +314,15 @@ defmodule PeachTest do
       |> Peach.find_exact_match(keyword_set)
 
     assert matches == "2"
+
+    input = "_menu_"
+    keyword_set = MapSet.new(["1", "2", "menu"])
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_exact_match(keyword_set)
+
+    assert matches == "menu"
 
     # Fuzzy keyword match with global threshold.
     input = "menuu"
