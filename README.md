@@ -21,7 +21,7 @@ be found at [https://hexdocs.pm/peach](https://hexdocs.pm/peach).
 
 ## Testing
 
-to test with CSV data, create a folder in the `/test/` folder called `function_test_data` and put the following CSVs in them:
+To test with CSV data, create a folder in the `/test/` folder called `function_test_data` and put the following CSVs in them:
 
 * `normalise_whitespace.csv`
 * `remove_punc.csv`
