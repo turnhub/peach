@@ -97,7 +97,7 @@ defmodule Peach do
     do:
       Enum.find(keyword_set, fn
         ^input -> true
-        other -> false
+        _other -> false
       end)
 
   @doc """
