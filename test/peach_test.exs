@@ -344,5 +344,32 @@ defmodule PeachTest do
       |> Peach.find_fuzzy_matches(keyword_threshold_set)
 
     assert matches == [{"optin", 1}, {"optout", 2}]
+
+    input = "202001"
+    keyword_threshold_set = MapSet.new([{"hi", 2}, {"aa", 2}, {"bb", 2}, {"foo", 2}])
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_fuzzy_matches(keyword_threshold_set)
+
+    assert matches == []
+
+    input = "202a001"
+    keyword_threshold_set = MapSet.new([{"hi", 2}])
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_fuzzy_matches(keyword_threshold_set)
+
+    assert matches == []
+
+    input = "202aa001"
+    keyword_threshold_set = MapSet.new([{"hi", 2}])
+
+    matches =
+      Peach.pre_process(input)
+      |> Peach.find_fuzzy_matches(keyword_threshold_set)
+
+    assert matches == []
   end
 end

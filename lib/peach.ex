@@ -106,21 +106,27 @@ defmodule Peach do
   def find_fuzzy_matches(input, keyword_threshold_set) do
     cleaned_input = remove_numbers(input)
 
-    keyword_threshold_set
-    # add the edit distance.
-    |> Enum.map(fn {keyword, threshold} ->
-      {keyword, levenshtein_distance(cleaned_input, keyword), threshold}
-    end)
-    # only keep close matches.
-    |> Enum.filter(fn {_keyword, distance, threshold} ->
-      distance <= threshold
-    end)
-    # drop threshold.
-    |> Enum.map(fn {keyword, distance, _threshold} ->
-      {keyword, distance}
-    end)
-    # order from best to worst matches.
-    |> Enum.sort(&(elem(&1, 1) < elem(&2, 1)))
+    case cleaned_input do
+      "" ->
+        []
+
+      _ ->
+        keyword_threshold_set
+        # add the edit distance.
+        |> Enum.map(fn {keyword, threshold} ->
+          {keyword, levenshtein_distance(cleaned_input, keyword), threshold}
+        end)
+        # only keep close matches.
+        |> Enum.filter(fn {_keyword, distance, threshold} ->
+          distance <= threshold
+        end)
+        # drop threshold.
+        |> Enum.map(fn {keyword, distance, _threshold} ->
+          {keyword, distance}
+        end)
+        # order from best to worst matches.
+        |> Enum.sort(&(elem(&1, 1) < elem(&2, 1)))
+    end
   end
 
   @doc """
