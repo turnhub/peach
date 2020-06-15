@@ -4,20 +4,19 @@ An elixir library to do approximate/fuzzy string matching.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
+This package is not [available in Hex](https://hex.pm/docs/publish), as it has dependencies that are not themselves published on hex. the package can be installed
 by adding `peach` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:peach, "~> 0.1.0"}
+    {:peach, "~> 0.1.1", github: "turnhub/peach", branch: "develop"},
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/peach](https://hexdocs.pm/peach).
+Public docs are also unfortunately not available due to our inability to publish this package.
+Please see the code for documentation.
 
 ## Testing
 
