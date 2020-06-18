@@ -1,4 +1,5 @@
 defmodule Peach do
+  alias Levenshtein
   @doc """
   Normalize text
   Unicode NFKC (Normalisation Form Compatibility Composition) normalisation.
@@ -87,7 +88,7 @@ defmodule Peach do
   Calculate the Levenshtein edit distance.
   """
   def levenshtein_distance(first_phrase, second_phrase) do
-    :levenshtein.levenshtein(first_phrase, second_phrase)
+    Levenshtein.distance(first_phrase, second_phrase)
   end
 
   @doc """
