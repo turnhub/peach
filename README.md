@@ -10,7 +10,7 @@ by adding `peach` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:peach, "~> 0.1.0"}
+    {:peach, "~> 0.2.0"}
   ]
 end
 ```
