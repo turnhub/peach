@@ -1,5 +1,14 @@
 defmodule Peach do
+  @moduledoc """
+  Peach provides fuzzy matching as well as tools for preprocessing text
+
+  ## Example
+
+    iex> "hɘllo🧐  " |> Peach.pre_process |> Peach.levenshtein_distance("hello")
+    1
+  """
   alias Levenshtein
+
   @doc """
   Normalize text
   Unicode NFKC (Normalisation Form Compatibility Composition) normalisation.
