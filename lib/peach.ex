@@ -1,4 +1,13 @@
 defmodule Peach do
+  @moduledoc """
+  Peach provides fuzzy matching as well as tools for preprocessing text
+
+  ## Example
+
+    iex> "hɘllo🧐  " |> Peach.pre_process |> Peach.levenshtein_distance("hello")
+    1
+  """
+
   @doc """
   Normalize text
   Unicode NFKC (Normalisation Form Compatibility Composition) normalisation.
@@ -87,7 +96,7 @@ defmodule Peach do
   Calculate the Levenshtein edit distance.
   """
   def levenshtein_distance(first_phrase, second_phrase) do
-    :levenshtein.levenshtein(first_phrase, second_phrase)
+    Levenshtein.distance(first_phrase, second_phrase)
   end
 
   @doc """

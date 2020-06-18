@@ -27,8 +27,9 @@ defmodule Peach.MixProject do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:mix_test_watch, "~> 1.0.1", only: :dev, runtime: false},
-      {:levenshtein, git: "https://github.com/rschlaikjer/erlang-levenshtein.git", tag: "0.6.0"},
+      {:levenshtein, "~> 0.3.0"},
       {:csvlixir, "~> 2.0.3", only: :test},
+      {:credo, "~> 1.4", only: :dev, runtime: false},
       {:remove_emoji, "~> 1.0.1"}
     ]
   end

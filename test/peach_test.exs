@@ -3,7 +3,7 @@ defmodule PeachTest do
   use ExUnit.Case
   doctest Peach
 
-  @tag timeout: 6000_000
+  @tag timeout: 6_000_000
   test "normalise_text" do
     test_data = [
       ["foo", "foo"],
@@ -34,7 +34,7 @@ defmodule PeachTest do
     end)
   end
 
-  @tag timeout: 6000_000
+  @tag timeout: 6_000_000
   test "remove_emojis" do
     test_data = [
       ["🧐🙍🏾‍♂️🦎🇧🇮🇦🇶", ""],
@@ -78,7 +78,7 @@ defmodule PeachTest do
     assert Peach.remove_emojis("®️") != ""
   end
 
-  @tag timeout: 6000_000
+  @tag timeout: 6_000_000
   test "normalise_whitespace" do
     test_data = [
       ["in     put", "in put"],
@@ -104,7 +104,7 @@ defmodule PeachTest do
     end)
   end
 
-  @tag timeout: 6000_000
+  @tag timeout: 6_000_000
   test "remove_punc" do
     test_data = [
       ["!@#$%^&*()", ""],
@@ -129,7 +129,7 @@ defmodule PeachTest do
     end)
   end
 
-  @tag timeout: 6000_000
+  @tag timeout: 6_000_000
   test "replace_punc" do
     test_data = [
       ["this.is.a.test", "this is a test"],
@@ -154,7 +154,7 @@ defmodule PeachTest do
     end)
   end
 
-  @tag timeout: 6000_000
+  @tag timeout: 6_000_000
   test "remove_numbers" do
     test_data = [
       ["1234", ""],
@@ -180,7 +180,7 @@ defmodule PeachTest do
     end)
   end
 
-  @tag timeout: 6000_000
+  @tag timeout: 6_000_000
   test "pre_process" do
     test_data = [
       # ["ا","ا"], FAILURE CASE
